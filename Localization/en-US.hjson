@@ -76,6 +76,7 @@ Mods: {
 					'An amalgamation of organic vileness'
 					Summons Ophiopede?
 					'''
+				SummonMessage: The air becomes stale and moist around you.
 			}
 
 			LivingCarrion: {
@@ -92,7 +93,12 @@ Mods: {
 			EvenMoreVileSpit.DisplayName: Even More Vile Spit
 			FlyMinion.DisplayName: Ophioid Fly Minion
 			FlyMinionCacoon.DisplayName: Coocoon Carriers
-			Ophiocoon.DisplayName: Ophiocoon
+
+			Ophiocoon: {
+				DisplayName: Ophiocoon
+				DeathMessage: The Ophiofly hatches from the Cocoon!
+			}
+
 			MetaOphiocoon.DisplayName: Ophiocoon
 
 			Ophiofly: {
@@ -103,6 +109,8 @@ Mods: {
 					SpawnInfo: Use an [i:OphioidMod/InfestedCompost] at any time after beating Ophiopede
 					DespawnMessage: Ophioid slinks back into its hidden nest
 				}
+
+				DeathMessage: The {0}'s abomination is no longer felt, Ophioid is defeated!
 			}
 
 			OphiopedeHead: {
@@ -113,11 +121,18 @@ Mods: {
 					DespawnMessage: Ophiopede tunnels away
 					EntryName: Ophiopede
 				}
+
+				DeathMessage: The infested worm is defeated, but you can still feel the presence of the {0}'s abomination.
 			}
 
 			OphiopedeBody.DisplayName: Ophiopede
 			OphiopedeTail.DisplayName: Ophiopede
-			OphiopedeHead2.DisplayName: Ophiopede
+
+			OphiopedeHead2: {
+				DisplayName: Ophiopede
+				SummonMessage: The Ophiopede begins to metamorphosize!
+			}
+
 			OphSporeCloud.DisplayName: Ophioid Spore Cloud
 			TheSeeing.DisplayName: The Seeing
 		}

@@ -129,7 +129,7 @@ namespace OphioidMod.NPCs
 
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    IDGHelper.Chat("The Ophiofly hatches from the Cocoon!", 100, 225, 100);
+                    IDGHelper.Chat(Language.GetTextValue("Mods.OphioidMod.NPCs.Ophiocoon.DeathMessage"), 100, 225, 100);
 
                     int x = (int)(NPC.position.X + (float)Main.rand.Next(NPC.width - 32));
                     int y = (int)(NPC.position.Y + (float)Main.rand.Next(NPC.height - 32));

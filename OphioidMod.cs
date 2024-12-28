@@ -44,30 +44,35 @@ namespace OphioidMod
     }
 
     class OphioidMod : Mod
-	{
-		public static OphioidMod Instance;
+    {
+        public static OphioidMod Instance;
         //public static Mod Idglib;
-		public OphioidMod()
-		{
+        public OphioidMod()
+        {
 
-		}
+        }
 
         public override void Load()
         {
             Instance = this;
+            Ophiofly.CustomWorldEvilForDeathMessage = "";
+            if (ModLoader.TryGetMod("Wikithis", out Mod wikithis) && !Main.dedServ)
+            {
+                // The wiki is a little outdated. It will need to be moved to wiki.gg and updated for the 1.4 version.
+                wikithis.Call("AddModURL", this, "https://terrariamods.fandom.com/wiki/Ophioid{}");
+            }
         }
 
         public override void Unload()
         {
             Instance = null;
+            Ophiofly.CustomWorldEvilForDeathMessage = "";
         }
         
-		public override void PostSetupContent()
-		{
-            //Not in 1.4 yet
-
-			if (ModLoader.TryGetMod("BossChecklist", out Mod bossList))
-			{
+        public override void PostSetupContent()
+        {
+            if (ModLoader.TryGetMod("BossChecklist", out Mod bossList))
+            {
                 //bossList.Call("AddBossWithInfo", "Ophiopede", 9.05f, (Func<bool>)(() => OphioidWorld.downedOphiopede), string.Format("Use a [i:{0}] or [i:{1}] anywhere, anytime", ItemType("Deadfungusbug"), ItemType("Livingcarrion")));
                 //bossList.Call("AddBossWithInfo", "Ophioid", 11.50f, (Func<bool>)(() => OphioidWorld.downedOphiopede2), string.Format("Use a [i:{0}] anywhere, anytime", ItemType("Infestedcompost")));
                 /*
@@ -92,10 +97,10 @@ namespace OphioidMod
                     "Use a [i:" + ModContent.ItemType<Deadfungusbug>() + "] or [i:" + ModContent.ItemType<Livingcarrion>() + "] at any time",
                     "Ophiopede tunnels away",
                     (Action<SpriteBatch, Rectangle, Color>)((SpriteBatch sb, Rectangle rect, Color color) =>
-					{
-						Texture2D texture = ModContent.Request<Texture2D>("OphioidMod/BCLPede").Value;
-						Vector2 centered = new(rect.X + (rect.Width / 2) - (texture.Width / 2), rect.Y + (rect.Height / 2) - (texture.Height / 2) - 20);
-						sb.Draw(texture, centered, color);
+                    {
+                        Texture2D texture = ModContent.Request<Texture2D>("OphioidMod/BCLPede").Value;
+                        Vector2 centered = new(rect.X + (rect.Width / 2) - (texture.Width / 2), rect.Y + (rect.Height / 2) - (texture.Height / 2) - 20);
+                        sb.Draw(texture, centered, color);
                     })
                 );
                 bossList.Call
@@ -123,70 +128,70 @@ namespace OphioidMod
                 (
                     "LogBoss",
                     this,
-					nameof(OphiopedeHead),
+                    nameof(OphiopedeHead),
                     11.05f,
                     () => OphioidWorld.downedOphiopede,
-					new List<int> { ModContent.NPCType<OphiopedeHead>(), ModContent.NPCType<OphiopedeBody>(), ModContent.NPCType<OphiopedeTail>() },
+                    new List<int> { ModContent.NPCType<OphiopedeHead>(), ModContent.NPCType<OphiopedeBody>(), ModContent.NPCType<OphiopedeTail>() },
                     new Dictionary<string, object>()
                     { 
                         { "spawnItems", new List<int> { ModContent.ItemType<DeadFungusbug>(), ModContent.ItemType<LivingCarrion>() } },
-						{ "collectibles", new List<int> { ModContent.ItemType<Ophiopedetrophyitem>(), ModContent.ItemType<OphiopedeMask>(), ModContent.ItemType<MusicBoxMetamorphosis>() } },
+                        { "collectibles", new List<int> { ModContent.ItemType<Ophiopedetrophyitem>(), ModContent.ItemType<OphiopedeMask>(), ModContent.ItemType<MusicBoxMetamorphosis>() } },
                         { "customPortrait", (SpriteBatch sb, Rectangle rect, Color color) =>
-					        {
-					            Texture2D texture = ModContent.Request<Texture2D>("OphioidMod/BCLPede").Value;
-					            Vector2 centered = new(rect.X + (rect.Width / 2) - (texture.Width / 2), rect.Y + (rect.Height / 2) - (texture.Height / 2) - 20);
-					            sb.Draw(texture, centered, color);
-				            }
+                            {
+                                Texture2D texture = ModContent.Request<Texture2D>("OphioidMod/BCLPede").Value;
+                                Vector2 centered = new(rect.X + (rect.Width / 2) - (texture.Width / 2), rect.Y + (rect.Height / 2) - (texture.Height / 2) - 20);
+                                sb.Draw(texture, centered, color);
+                            }
                         }
-					}
-				);
+                    }
+                );
 
-				bossList.Call
-				(
-					"LogBoss",
-					this,
-					nameof(Ophiofly),
-					16.05f,
-					() => OphioidWorld.downedOphiopede2,
-					new List<int> { ModContent.NPCType<Ophiofly>(), ModContent.NPCType<OphiopedeHead2>(), ModContent.NPCType<OphiopedeBody>(), ModContent.NPCType<OphiopedeTail>() },
-					new Dictionary<string, object>()
-					{
-						{ "spawnItems", new List<int> { ModContent.ItemType<InfestedCompost>() } },
-						{ "collectibles", new List<int> { ModContent.ItemType<Ophiopedetrophyitem>(), ModContent.ItemType<OphiopedeMask>(), ModContent.ItemType<MusicBoxMetamorphosis>(), ModContent.ItemType<MusicBoxTheFly>(), ModContent.ItemType<SporeInfestedEgg>(), ModContent.ItemType<OphioidLarva>() } },
-						{ "customPortrait", (SpriteBatch sb, Rectangle rect, Color color) =>
-							{
-								Texture2D texture = ModContent.Request<Texture2D>("OphioidMod/BCLFly").Value;
-						        Vector2 centered = new(rect.X + (rect.Width / 2) - (texture.Width / 2), rect.Y + (rect.Height / 2) - (texture.Height / 2));
-						        sb.Draw(texture, centered, color);
-							}
-						}
-					}
-				);
-			}
+                bossList.Call
+                (
+                    "LogBoss",
+                    this,
+                    nameof(Ophiofly),
+                    16.05f,
+                    () => OphioidWorld.downedOphiopede2,
+                    new List<int> { ModContent.NPCType<Ophiofly>(), ModContent.NPCType<OphiopedeHead2>(), ModContent.NPCType<OphiopedeBody>(), ModContent.NPCType<OphiopedeTail>() },
+                    new Dictionary<string, object>()
+                    {
+                        { "spawnItems", new List<int> { ModContent.ItemType<InfestedCompost>() } },
+                        { "collectibles", new List<int> { ModContent.ItemType<Ophiopedetrophyitem>(), ModContent.ItemType<OphiopedeMask>(), ModContent.ItemType<MusicBoxMetamorphosis>(), ModContent.ItemType<MusicBoxTheFly>(), ModContent.ItemType<SporeInfestedEgg>(), ModContent.ItemType<OphioidLarva>() } },
+                        { "customPortrait", (SpriteBatch sb, Rectangle rect, Color color) =>
+                            {
+                                Texture2D texture = ModContent.Request<Texture2D>("OphioidMod/BCLFly").Value;
+                                Vector2 centered = new(rect.X + (rect.Width / 2) - (texture.Width / 2), rect.Y + (rect.Height / 2) - (texture.Height / 2));
+                                sb.Draw(texture, centered, color);
+                            }
+                        }
+                    }
+                );
+            }
 
-            /*if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutantMod))
+            if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutantMod))
             {
-                fargosMutantMod.Call("AddSummon", 9.05f, "OphioidMod", "Deadfungusbug", (Func<bool>)(() => OphioidWorld.downedOphiopede == true), Item.buyPrice(0, 65, 0, 0));
-                fargosMutantMod.Call("AddSummon", 9.05f, "OphioidMod", "Livingcarrion", (Func<bool>)(() => OphioidWorld.downedOphiopede == true), Item.buyPrice(0, 65, 0, 0));
-                fargosMutantMod.Call("AddSummon", 11.1f, "OphioidMod", "Infestedcompost", (Func<bool>)(() => OphioidWorld.downedOphiopede2 == true), Item.buyPrice(0, 95, 0, 0));
-            }*/
+                fargosMutantMod.Call("AddSummon", 11.1f, "OphioidMod", "DeadFungusbug", (Func<bool>)(() => OphioidWorld.downedOphiopede == true), Item.buyPrice(0, 65, 0, 0));
+                fargosMutantMod.Call("AddSummon", 11.1f, "OphioidMod", "LivingCarrion", (Func<bool>)(() => OphioidWorld.downedOphiopede == true), Item.buyPrice(0, 65, 0, 0));
+                fargosMutantMod.Call("AddSummon", 16.1f, "OphioidMod", "InfestedCompost", (Func<bool>)(() => OphioidWorld.downedOphiopede2 == true), Item.buyPrice(0, 95, 0, 0));
+            }
 
             /*
             //Idglib = ModLoader.GetMod("Idglib");
 
             Mod yabhb = ModLoader.GetMod("FKBossHealthBar");
-			if(yabhb != null)
-			{
-     			yabhb.Call("hbStart");
-     			yabhb.Call("hbSetTexture",
-         		GetTexture("healtbar_left"),
-         		GetTexture("healtbar_frame"),
-         		GetTexture("healtbar_right"),
-         		GetTexture("healtbar_fill"));
-    			yabhb.Call("hbSetMidBarOffset", -32, 12);
-     			yabhb.Call("hbSetBossHeadCentre", 80, 32);
-     			yabhb.Call("hbSetFillDecoOffsetSmall", 20);
-     			yabhb.Call("hbFinishSingle", NPCType("OphiopedeHead"));
+            if(yabhb != null)
+            {
+                 yabhb.Call("hbStart");
+                 yabhb.Call("hbSetTexture",
+                 GetTexture("healtbar_left"),
+                 GetTexture("healtbar_frame"),
+                 GetTexture("healtbar_right"),
+                 GetTexture("healtbar_fill"));
+                yabhb.Call("hbSetMidBarOffset", -32, 12);
+                 yabhb.Call("hbSetBossHeadCentre", 80, 32);
+                 yabhb.Call("hbSetFillDecoOffsetSmall", 20);
+                 yabhb.Call("hbFinishSingle", NPCType("OphiopedeHead"));
 
                 yabhb.Call("hbStart");
                 yabhb.Call("hbSetTexture",
@@ -221,7 +226,7 @@ namespace OphioidMod
                 yabhb.Call("hbSetFillDecoOffsetSmall", 20);
                 yabhb.Call("hbFinishMultiple",NPCType("FlyMinionCacoon"),NPCType("FlyMinionCacoon"));
 
-			}
+            }
             */
         }
 
@@ -249,6 +254,41 @@ namespace OphioidMod
                 int time = reader.ReadInt32();
                 Main.npc[npcid].GetGlobalNPC<OphioidNPC>().fallthrough = time;
                 //Instance.Logger.DebugFormat("NPC ID is {0}", npcid);
+            }
+        }
+
+        public override object Call(params object[] args)
+        {
+            if (args[0] is not string function)
+            {
+                Logger.Error("Call Error: Expected a function name for the first argument");
+                return null;
+            }
+            switch (function)
+            {
+                /// Returns true/false if Ophiopede (1st fight) has been defeated.
+                case "downedOphiopede":
+                    return OphioidWorld.downedOphiopede;
+                /// Returns true/false if Ophiofly (2nd fight) has been defeated.
+                case "downedOphiofly":
+                case "downedOphiopede2":
+                    return OphioidWorld.downedOphiopede2;
+                /// Returns true/false if Ophiopede's Head (1st fight), Ophiopede's Head (2nd fight), Ophiocoon, or Ophiofly are active.
+                case "OphioidBossIsActive":
+                case "OphioidBoss":
+                    return OphioidWorld.OphioidBoss;
+                /// Returns a string for the name of the world evil for Ophiopede (1st fight) and Ophiofly's death messages.
+                /// Will be the CustomWorldEvilForDeathMessage if set.
+                case "GetWorldEvilForDeathMessage":
+                    return Ophiofly.GetWorldEvilForDeathMessage();
+                /// Sets a custom name for the world evil for Ophiopede (1st fight) and Ophiofly's death messages.
+                /// Pass the custom name as the second argument.
+                case "SetCustomWorldEvilForDeathMessage":
+                    return Ophiofly.CustomWorldEvilForDeathMessage = args[1].ToString();
+
+                default:
+                    Logger.Error($"Function \"{function}\" is not defined by Ophioid Mod");
+                    return null;
             }
         }
     }

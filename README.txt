@@ -12,6 +12,13 @@ Current Content:
 
 Version History :
 
+V2.31
+- Added some Mod Calls.
+- Re-added support for Fargo's Mutant Mod.
+- Localized some more strings.
+- Adjusted the positions and animations of the pets while in the character select menu.
+- Added Wikithis support.
+
 V2.30
 - Updated to tModLoader v2022.10
 - Removed Corruption/Crimson restriction on Dead Fungusbug/Living Carrion. You can now use either to summon the 1st Ophiopede.

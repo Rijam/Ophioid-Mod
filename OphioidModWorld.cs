@@ -1,22 +1,8 @@
 using Terraria;
-using Terraria.Graphics.Effects;
-using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
 using System.IO;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria.DataStructures;
 using Terraria.ModLoader.IO;
-using Terraria.ObjectData;
-using Terraria.GameContent.ItemDropRules;
-using System;
-using System.Linq;
-using static Terraria.GameContent.ItemDropRules.Conditions;
-using Terraria.GameContent.Bestiary;
-using Terraria.GameContent.ObjectInteractions;
-using Terraria.Audio;
 using OphioidMod.NPCs;
 
 namespace OphioidMod

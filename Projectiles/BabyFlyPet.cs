@@ -11,6 +11,10 @@ namespace OphioidMod.Projectiles
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Gross but cute Fly");
+            ProjectileID.Sets.CharacterPreviewAnimations[Projectile.type] = ProjectileID.Sets.SimpleLoop(0, 4, 4)
+                .WhenNotSelected(0, 0)
+                .WithOffset(-5f, -15f)
+                .WithSpriteDirection(-1);
         }
 
         public override string Texture

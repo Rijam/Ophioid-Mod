@@ -3,6 +3,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 using OphioidMod.NPCs;
+using Terraria.Localization;
 
 namespace OphioidMod.Items
 {
@@ -13,9 +14,9 @@ namespace OphioidMod.Items
             // DisplayName.SetDefault("Dead Fungusbug");
             // Tooltip.SetDefault("'A putrid stench comes from the thing you just made, it might attract something...' \nSummons Ophiopede in a Corruption world");
             Item.ResearchUnlockCount = 3;
-			ItemID.Sets.SortingPriorityBossSpawns[Type] = 12;
+            ItemID.Sets.SortingPriorityBossSpawns[Type] = 12;
             ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<LivingCarrion>();
-		}
+        }
         public override void SetDefaults()
         {
             Item.width = 12;
@@ -36,26 +37,26 @@ namespace OphioidMod.Items
 
         public override bool? UseItem(Player player)
         {
-			if (player.whoAmI == Main.myPlayer)
-			{
-				// If the player using the item is the client
-				// (explicitly excluded serverside here)
-				SoundEngine.PlaySound(SoundID.Roar, player.position);
+            if (player.whoAmI == Main.myPlayer)
+            {
+                // If the player using the item is the client
+                // (explicitly excluded serverside here)
+                SoundEngine.PlaySound(SoundID.Roar, player.position);
 
-				int type = ModContent.NPCType<OphiopedeHead>();
+                int type = ModContent.NPCType<OphiopedeHead>();
 
-				if (Main.netMode != NetmodeID.MultiplayerClient)
-				{
-					// If the player is not in multiplayer, spawn directly
-					NPC.SpawnOnPlayer(player.whoAmI, type);
-				}
-				else
-				{
-					// If the player is in multiplayer, request a spawn
-					// This will only work if NPCID.Sets.MPAllowedEnemies[type] is true, which we set in OphiopedeHead
-					NetMessage.SendData(MessageID.SpawnBossUseLicenseStartEvent, number: player.whoAmI, number2: type);
-				}
-			}
+                if (Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    // If the player is not in multiplayer, spawn directly
+                    NPC.SpawnOnPlayer(player.whoAmI, type);
+                }
+                else
+                {
+                    // If the player is in multiplayer, request a spawn
+                    // This will only work if NPCID.Sets.MPAllowedEnemies[type] is true, which we set in OphiopedeHead
+                    NetMessage.SendData(MessageID.SpawnBossUseLicenseStartEvent, number: player.whoAmI, number2: type);
+                }
+            }
 
             return true;
         }
@@ -81,8 +82,8 @@ namespace OphioidMod.Items
             // DisplayName.SetDefault("Infested Compost");
             // Tooltip.SetDefault("'An amalgamation of organic vileness \nSummons Ophiopede?");
             Item.ResearchUnlockCount = 3;
-			ItemID.Sets.SortingPriorityBossSpawns[Type] = 12;
-		}
+            ItemID.Sets.SortingPriorityBossSpawns[Type] = 12;
+        }
 
         public override bool CanUseItem(Player player)
         {
@@ -91,28 +92,28 @@ namespace OphioidMod.Items
 
         public override bool? UseItem(Player player)
         {
-			if (player.whoAmI == Main.myPlayer)
-			{
-				// If the player using the item is the client
-				// (explicitly excluded serverside here)
-				SoundEngine.PlaySound(SoundID.Roar, player.position);
+            if (player.whoAmI == Main.myPlayer)
+            {
+                // If the player using the item is the client
+                // (explicitly excluded serverside here)
+                SoundEngine.PlaySound(SoundID.Roar, player.position);
 
-				IDGHelper.Chat("The air becomes stale and moist around you.", 100, 225, 100);
+                IDGHelper.Chat(Language.GetTextValue("Mods.OphioidMod.Items.InfestedCompost.SummonMessage"), 100, 225, 100);
 
-				int type = ModContent.NPCType<OphiopedeHead2>();
+                int type = ModContent.NPCType<OphiopedeHead2>();
 
-				if (Main.netMode != NetmodeID.MultiplayerClient)
-				{
-					// If the player is not in multiplayer, spawn directly
-					NPC.SpawnOnPlayer(player.whoAmI, type);
-				}
-				else
-				{
-					// If the player is in multiplayer, request a spawn
-					// This will only work if NPCID.Sets.MPAllowedEnemies[type] is true, which we set in OphiopedeHead2
-					NetMessage.SendData(MessageID.SpawnBossUseLicenseStartEvent, number: player.whoAmI, number2: type);
-				}
-			}
+                if (Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    // If the player is not in multiplayer, spawn directly
+                    NPC.SpawnOnPlayer(player.whoAmI, type);
+                }
+                else
+                {
+                    // If the player is in multiplayer, request a spawn
+                    // This will only work if NPCID.Sets.MPAllowedEnemies[type] is true, which we set in OphiopedeHead2
+                    NetMessage.SendData(MessageID.SpawnBossUseLicenseStartEvent, number: player.whoAmI, number2: type);
+                }
+            }
 
             return true;
         }
@@ -135,9 +136,9 @@ namespace OphioidMod.Items
             // DisplayName.SetDefault("Living Carrion");
             // Tooltip.SetDefault("'A putrid stench comes from the thing you just made, it might attract something...' \nSummons Ophiopede in a Crimson world");
             Item.ResearchUnlockCount = 3;
-			ItemID.Sets.SortingPriorityBossSpawns[Type] = 12;
-			ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<DeadFungusbug>();
-		}
+            ItemID.Sets.SortingPriorityBossSpawns[Type] = 12;
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<DeadFungusbug>();
+        }
 
         public override bool CanUseItem(Player player)
         {

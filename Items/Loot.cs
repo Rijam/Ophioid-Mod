@@ -43,7 +43,7 @@ namespace OphioidMod.Items
             Item.rare = ItemRarityID.Red;
             Item.shoot = ModContent.ProjectileType<BabyFlyPet>();
             Item.buffType = ModContent.BuffType<BabyOphioflyBuff>();
-			Item.value = Item.sellPrice(0, 1, 0, 0);
+            Item.value = Item.sellPrice(0, 1, 0, 0);
         }
 
         public override void UseStyle(Player player, Rectangle heldItemFrame)
@@ -87,7 +87,7 @@ namespace OphioidMod.Items
             // DisplayName.SetDefault("Treasure Bag (Ophioid)");
             // Tooltip.SetDefault("{$CommonItemTooltip.RightClickToOpen}");
             ItemID.Sets.BossBag[Type] = true; // This set is one that every boss bag should have, it, for example, lets our boss bag drop dev armor..
-			Item.ResearchUnlockCount = 3;
+            Item.ResearchUnlockCount = 3;
         }
         public override void SetDefaults()
         {

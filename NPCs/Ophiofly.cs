@@ -1,6 +1,4 @@
 using Terraria;
-using Terraria.Graphics.Effects;
-using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -8,13 +6,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
-using Terraria.UI;
-using Terraria.DataStructures;
-using Terraria.GameContent.UI;
-using Terraria.ModLoader.IO;
-using Terraria.ObjectData;
 using System;
-using Microsoft.Xna.Framework.Graphics.PackedVector;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.GameContent.Bestiary;
 using Terraria.Audio;
@@ -38,6 +30,12 @@ namespace OphioidMod.NPCs
         bool glowred = false;
         Player ply = null;
 
+        public static string CustomWorldEvilForDeathMessage = "";
+
+        public static string GetWorldEvilForDeathMessage()
+        {
+            return CustomWorldEvilForDeathMessage != "" ? CustomWorldEvilForDeathMessage : WorldGen.crimson ? Language.GetTextValue("WorkshopTags.CrimsonWorlds") : Language.GetTextValue("WorkshopTags.CorruptionWorlds");
+        }
 
         public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)/* tModPorter Note: bossLifeScale -> balance (bossAdjustment is different, see the docs for details) */
         {
@@ -484,10 +482,10 @@ namespace OphioidMod.NPCs
             if (!OphioidWorld.downedOphiopede2)
             {
                 if (Main.netMode != NetmodeID.MultiplayerClient)
-                    IDGHelper.Chat("The " + (WorldGen.crimson ? "Crimson" : "Corruption") + "'s abomination is no longer felt, Ophioid is defeated", 100, 225, 100);
-				//OphioidWorld.downedOphiopede2 = true;
-				NPC.SetEventFlagCleared(ref OphioidWorld.downedOphiopede2, -1);
-			}
+                    IDGHelper.Chat(Language.GetTextValue("Mods.OphioidMod.NPCs.Ophiofly.DeathMessage", GetWorldEvilForDeathMessage()), 100, 225, 100);
+                //OphioidWorld.downedOphiopede2 = true;
+                NPC.SetEventFlagCleared(ref OphioidWorld.downedOphiopede2, -1);
+            }
 
             //if (Main.expertMode)
             //    NPC.DropBossBags();
@@ -495,34 +493,34 @@ namespace OphioidMod.NPCs
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-			// OphiopedeHead.DoThemDrops(npcLoot, true);
+            // OphiopedeHead.DoThemDrops(npcLoot, true);
 
-			npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<TreasureBagOphioid>()));
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<TreasureBagOphioid>()));
 
-			npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<Items.OphioflyRelic>()));
+            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<Items.OphioflyRelic>()));
 
-			npcLoot.Add(ItemDropRule.MasterModeDropOnAllPlayers(ModContent.ItemType<Items.OphioidLarva>(), 4));
+            npcLoot.Add(ItemDropRule.MasterModeDropOnAllPlayers(ModContent.ItemType<Items.OphioidLarva>(), 4));
 
-			// This code uses LeadingConditionRule to logically nest several rules under it.
-			LeadingConditionRule notExpert = new(new Conditions.NotExpert());
-			notExpert.OnSuccess(ItemDropRule.Common(ItemID.SoulofMight, 1, 12, 30));
-			notExpert.OnSuccess(ItemDropRule.Common(ItemID.SoulofFright, 1, 12, 30));
-			notExpert.OnSuccess(ItemDropRule.Common(ItemID.SoulofSight, 1, 12, 30));
-			notExpert.OnSuccess(ItemDropRule.Common(ItemID.SoulofNight, 1, 24, 60));
-			notExpert.OnSuccess(ItemDropRule.Common(ItemID.SoulofLight, 1, 24, 60));
-			notExpert.OnSuccess(ItemDropRule.Common(ItemID.SoulofFlight, 1, 24, 60));
-			notExpert.OnSuccess(ItemDropRule.Common(ItemID.FragmentSolar, 1, 12, 30));
-			notExpert.OnSuccess(ItemDropRule.Common(ItemID.FragmentVortex, 1, 12, 30));
-			notExpert.OnSuccess(ItemDropRule.Common(ItemID.FragmentNebula, 1, 12, 30));
-			notExpert.OnSuccess(ItemDropRule.Common(ItemID.FragmentStardust, 1, 12, 30));
-			notExpert.OnSuccess(ItemDropRule.Common(ModContent.ItemType<OphiopedeMask>(), 7));
-			notExpert.OnSuccess(ItemDropRule.Common(ModContent.ItemType<SporeInfestedEgg>(), 10));
+            // This code uses LeadingConditionRule to logically nest several rules under it.
+            LeadingConditionRule notExpert = new(new Conditions.NotExpert());
+            notExpert.OnSuccess(ItemDropRule.Common(ItemID.SoulofMight, 1, 12, 30));
+            notExpert.OnSuccess(ItemDropRule.Common(ItemID.SoulofFright, 1, 12, 30));
+            notExpert.OnSuccess(ItemDropRule.Common(ItemID.SoulofSight, 1, 12, 30));
+            notExpert.OnSuccess(ItemDropRule.Common(ItemID.SoulofNight, 1, 24, 60));
+            notExpert.OnSuccess(ItemDropRule.Common(ItemID.SoulofLight, 1, 24, 60));
+            notExpert.OnSuccess(ItemDropRule.Common(ItemID.SoulofFlight, 1, 24, 60));
+            notExpert.OnSuccess(ItemDropRule.Common(ItemID.FragmentSolar, 1, 12, 30));
+            notExpert.OnSuccess(ItemDropRule.Common(ItemID.FragmentVortex, 1, 12, 30));
+            notExpert.OnSuccess(ItemDropRule.Common(ItemID.FragmentNebula, 1, 12, 30));
+            notExpert.OnSuccess(ItemDropRule.Common(ItemID.FragmentStardust, 1, 12, 30));
+            notExpert.OnSuccess(ItemDropRule.Common(ModContent.ItemType<OphiopedeMask>(), 7));
+            notExpert.OnSuccess(ItemDropRule.Common(ModContent.ItemType<SporeInfestedEgg>(), 10));
 
-			npcLoot.Add(notExpert);
+            npcLoot.Add(notExpert);
 
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Ophiopedetrophyitem>(), 10));
 
-			/*float NPCVX = 0f; float NPCVY = 0f;
+            /*float NPCVX = 0f; float NPCVY = 0f;
             NPC.velocity += new Vector2(NPCVX, NPCVY) * 0.075f;
             NPC.velocity *= 0.95f;
             if (NPC.velocity.Length() > new Vector2(NPCVX, NPCVY).Length())
@@ -559,7 +557,7 @@ namespace OphioidMod.NPCs
                 NPC.DropBossBags();
             }
             */
-		}
+        }
 
         public override string Texture
         {
@@ -647,11 +645,11 @@ namespace OphioidMod.NPCs
 
         }
 
-		public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
-		{
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
+        {
             if (NPC.ai[1] == 2)
             {
-				target.AddBuff(BuffID.Rabies, 60 * 15, true);
+                target.AddBuff(BuffID.Rabies, 60 * 15, true);
             }
         }
 

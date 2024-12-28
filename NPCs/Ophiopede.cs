@@ -11,6 +11,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using OphioidMod.Projectiles;
 using OphioidMod.Items;
+using Terraria.Localization;
 
 namespace OphioidMod.NPCs
 {
@@ -54,11 +55,11 @@ namespace OphioidMod.NPCs
             Main.npcFrameCount[NPC.type] = 4;
             // Automatically group with other bosses
             NPCID.Sets.BossBestiaryPriority.Add(Type);
-			// Add this in for bosses that have a summon item, requires corresponding code in the item
-			NPCID.Sets.MPAllowedEnemies[Type] = true;
+            // Add this in for bosses that have a summon item, requires corresponding code in the item
+            NPCID.Sets.MPAllowedEnemies[Type] = true;
 
-			// Influences how the NPC looks in the Bestiary
-			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new()
+            // Influences how the NPC looks in the Bestiary
+            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new()
             {
                 CustomTexturePath = "OphioidMod/NPCs/BestiaryOphiopede",
                 PortraitPositionYOverride = 5f,
@@ -82,8 +83,8 @@ namespace OphioidMod.NPCs
             NPC.behindTiles = true;
             NPC.noTileCollide = true;
             NPC.noGravity = true;
-			Music = MusicLoader.GetMusicSlot(Mod, "Sounds/Music/Centipede_Mod_-_Metamorphosis");
-			NPC.value = Item.buyPrice(0, 50, 0, 0);
+            Music = MusicLoader.GetMusicSlot(Mod, "Sounds/Music/Centipede_Mod_-_Metamorphosis");
+            NPC.value = Item.buyPrice(0, 50, 0, 0);
             NPC.BossBar = ModContent.GetInstance<OphioidBossBar>();
         }
 
@@ -132,12 +133,12 @@ namespace OphioidMod.NPCs
         {
 
             if (!OphioidWorld.downedOphiopede && Main.netMode != NetmodeID.MultiplayerClient)
-                IDGHelper.Chat("The infested worm is defeated, but you can still feel the presence of the " + (WorldGen.crimson ? "Crimson" : "Corruption") + "'s abomination", 100, 225, 100);
+                IDGHelper.Chat(Language.GetTextValue("Mods.OphioidMod.NPCs.Ophiofly.DeathMessage", Ophiofly.GetWorldEvilForDeathMessage()), 100, 225, 100);
 
-			//OphioidWorld.downedOphiopede = true;
-			NPC.SetEventFlagCleared(ref OphioidWorld.downedOphiopede, -1);
+            //OphioidWorld.downedOphiopede = true;
+            NPC.SetEventFlagCleared(ref OphioidWorld.downedOphiopede, -1);
 
-		}
+        }
         /*
         public class CrimsonWorld : IItemDropRuleCondition, IProvideItemConditionDescription
         {
@@ -304,32 +305,32 @@ namespace OphioidMod.NPCs
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-			// DoThemDrops(npcLoot, false);
+            // DoThemDrops(npcLoot, false);
 
-			npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<Items.OphiopedeRelic>()));
+            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<Items.OphiopedeRelic>()));
 
-			// This code uses LeadingConditionRule to logically nest several rules under it.
-			LeadingConditionRule notExpert = new(new Conditions.NotExpert());
-			notExpert.OnSuccess(ItemDropRule.Common(ItemID.SoulofMight, 1, 12, 30));
-			notExpert.OnSuccess(ItemDropRule.Common(ItemID.SoulofFright, 1, 12, 30));
-			notExpert.OnSuccess(ItemDropRule.Common(ItemID.SoulofSight, 1, 12, 30));
-			notExpert.OnSuccess(ItemDropRule.Common(ItemID.SoulofNight, 1, 24, 60));
-			notExpert.OnSuccess(ItemDropRule.Common(ItemID.SoulofLight, 1, 24, 60));
+            // This code uses LeadingConditionRule to logically nest several rules under it.
+            LeadingConditionRule notExpert = new(new Conditions.NotExpert());
+            notExpert.OnSuccess(ItemDropRule.Common(ItemID.SoulofMight, 1, 12, 30));
+            notExpert.OnSuccess(ItemDropRule.Common(ItemID.SoulofFright, 1, 12, 30));
+            notExpert.OnSuccess(ItemDropRule.Common(ItemID.SoulofSight, 1, 12, 30));
+            notExpert.OnSuccess(ItemDropRule.Common(ItemID.SoulofNight, 1, 24, 60));
+            notExpert.OnSuccess(ItemDropRule.Common(ItemID.SoulofLight, 1, 24, 60));
 
-			npcLoot.Add(notExpert);
+            npcLoot.Add(notExpert);
 
-			LeadingConditionRule expert = new(new Conditions.IsExpert());
-			expert.OnSuccess(ItemDropRule.Common(ItemID.SoulofMight, 1, 15, 50));
-			expert.OnSuccess(ItemDropRule.Common(ItemID.SoulofFright, 1, 15, 50));
-			expert.OnSuccess(ItemDropRule.Common(ItemID.SoulofSight, 1, 15, 50));
-			expert.OnSuccess(ItemDropRule.Common(ItemID.SoulofNight, 1, 30, 100));
-			expert.OnSuccess(ItemDropRule.Common(ItemID.SoulofLight, 1, 30, 100));
+            LeadingConditionRule expert = new(new Conditions.IsExpert());
+            expert.OnSuccess(ItemDropRule.Common(ItemID.SoulofMight, 1, 15, 50));
+            expert.OnSuccess(ItemDropRule.Common(ItemID.SoulofFright, 1, 15, 50));
+            expert.OnSuccess(ItemDropRule.Common(ItemID.SoulofSight, 1, 15, 50));
+            expert.OnSuccess(ItemDropRule.Common(ItemID.SoulofNight, 1, 30, 100));
+            expert.OnSuccess(ItemDropRule.Common(ItemID.SoulofLight, 1, 30, 100));
 
-			npcLoot.Add(expert);
+            npcLoot.Add(expert);
 
-			npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<OphiopedeMask>(), 7));
-			npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Ophiopedetrophyitem>(), 10));
-		}
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<OphiopedeMask>(), 7));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Ophiopedetrophyitem>(), 10));
+        }
 
         public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)/* tModPorter Note: bossLifeScale -> balance (bossAdjustment is different, see the docs for details) */
         {
@@ -704,10 +705,10 @@ namespace OphioidMod.NPCs
         {
             // DisplayName.SetDefault("Ophiopede");
             Main.npcFrameCount[NPC.type] = 7;
-			// Add this in for bosses that have a summon item, requires corresponding code in the item
-			NPCID.Sets.MPAllowedEnemies[Type] = true;
+            // Add this in for bosses that have a summon item, requires corresponding code in the item
+            NPCID.Sets.MPAllowedEnemies[Type] = true;
 
-			NPCID.Sets.NPCBestiaryDrawModifiers bestiaryData = new()
+            NPCID.Sets.NPCBestiaryDrawModifiers bestiaryData = new()
             {
                 Hide = true // Hides this NPC from the bestiary
             };
@@ -730,8 +731,8 @@ namespace OphioidMod.NPCs
             NPC.behindTiles = true;
             NPC.noTileCollide = true;
             NPC.noGravity = true;
-			Music = MusicLoader.GetMusicSlot(Mod, "Sounds/Music/Centipede_Mod_-_Metamorphosis");
-			NPC.value = 90000f;
+            Music = MusicLoader.GetMusicSlot(Mod, "Sounds/Music/Centipede_Mod_-_Metamorphosis");
+            NPC.value = 90000f;
             //NPC.buffImmune[BuffID.Daybreak] = true; NPC.buffImmune[BuffID.Frostburn] = true; NPC.buffImmune[BuffID.Poisoned] = true; NPC.buffImmune[BuffID.Venom] = true;
         }
 
@@ -741,9 +742,9 @@ namespace OphioidMod.NPCs
         }
 
 
-		public override void ModifyIncomingHit(ref NPC.HitModifiers modifiers)
-		{
-			modifiers.FinalDamage.Flat *= (NPC.ai[1] > 99 ? 0.35f : 0.15f) * (Main.expertMode ? 1 : 1.25f);
+        public override void ModifyIncomingHit(ref NPC.HitModifiers modifiers)
+        {
+            modifiers.FinalDamage.Flat *= (NPC.ai[1] > 99 ? 0.35f : 0.15f) * (Main.expertMode ? 1 : 1.25f);
         }
 
         public override void UpdateLifeRegen(ref int damage)
@@ -935,10 +936,10 @@ namespace OphioidMod.NPCs
         {
             // DisplayName.SetDefault("Ophiopede");
             Main.npcFrameCount[NPC.type] = 4;
-			// Add this in for bosses that have a summon item, requires corresponding code in the item
-			NPCID.Sets.MPAllowedEnemies[Type] = true;
+            // Add this in for bosses that have a summon item, requires corresponding code in the item
+            NPCID.Sets.MPAllowedEnemies[Type] = true;
 
-			NPCID.Sets.NPCBestiaryDrawModifiers bestiaryData = new()
+            NPCID.Sets.NPCBestiaryDrawModifiers bestiaryData = new()
             {
                 Hide = true // Hides this NPC from the bestiary
             };
@@ -953,8 +954,8 @@ namespace OphioidMod.NPCs
             NPC.defense = 0;
         }
 
-		/*public override void ModifyIncomingHit(ref NPC.HitModifiers modifiers)
-		{
+        /*public override void ModifyIncomingHit(ref NPC.HitModifiers modifiers)
+        {
             return;
         }*/
 
@@ -1023,10 +1024,10 @@ namespace OphioidMod.NPCs
             NPC.frame.Y = 3 * frameHeight;
         }
     }
-	#endregion
+    #endregion
 
-	#region OphiopedeHead2
-	[AutoloadBossHead]
+    #region OphiopedeHead2
+    [AutoloadBossHead]
     public class OphiopedeHead2 : OphiopedeHead
     {
         public override string Texture
@@ -1042,7 +1043,7 @@ namespace OphioidMod.NPCs
                 {
                     NPC.boss = false;
                     NPC.active = false;
-                    IDGHelper.Chat("The Ophiopede begins to metamorphosize!", 100, 225, 100);
+                    IDGHelper.Chat(Language.GetTextValue("Mods.OphioidMod.NPCs.OphiopedeHead2.SummonMessage"), 100, 225, 100);
 
                     int x = (int)(NPC.position.X + (float)Main.rand.Next(NPC.width - 32));
                     int y = (int)(NPC.position.Y + (float)Main.rand.Next(NPC.height - 32));
@@ -1064,11 +1065,11 @@ namespace OphioidMod.NPCs
             Main.npcFrameCount[NPC.type] = 4;
             // Automatically group with other bosses
             NPCID.Sets.BossBestiaryPriority.Add(Type);
-			// Add this in for bosses that have a summon item, requires corresponding code in the item
-			NPCID.Sets.MPAllowedEnemies[Type] = true;
+            // Add this in for bosses that have a summon item, requires corresponding code in the item
+            NPCID.Sets.MPAllowedEnemies[Type] = true;
 
-			// Influences how the NPC looks in the Bestiary
-			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new()
+            // Influences how the NPC looks in the Bestiary
+            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new()
             {
                 CustomTexturePath = "OphioidMod/NPCs/BestiaryOphiopede",
                 PortraitPositionYOverride = 5f,
@@ -1110,10 +1111,10 @@ namespace OphioidMod.NPCs
             });
         }
 
-		public override void ModifyNPCLoot(NPCLoot npcLoot)
-		{
-			// Empty so it doesn't inherit the loot.
-		}
-	}
-	#endregion
+        public override void ModifyNPCLoot(NPCLoot npcLoot)
+        {
+            // Empty so it doesn't inherit the loot.
+        }
+    }
+    #endregion
 }

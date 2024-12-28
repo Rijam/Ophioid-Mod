@@ -159,10 +159,10 @@ namespace OphioidMod.Projectiles
 
         }
 
-		public override void OnHitPlayer(Player target, Player.HurtInfo info)
-		{
-			target.AddBuff(BuffID.Ichor, 60 * 10, true);
-			target.AddBuff(BuffID.Darkness, 60 * 15, true);
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
+        {
+            target.AddBuff(BuffID.Ichor, 60 * 10, true);
+            target.AddBuff(BuffID.Darkness, 60 * 15, true);
         }
     }
 }
