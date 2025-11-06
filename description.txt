@@ -9,8 +9,14 @@ With the introduction of the 1.4 Port, some things have changed, see V2.15
 Current Content:
 - 2 summoning items for both evil biomes and 1 for the rematch fight
 - 2 (2nd boss has 3 phases) Bosses (With trophy and mask and a pet item!)
+- Achievements for both bosses
 
 Version History :
+
+V2.32
+- Added mod achievements for both bosses.
+- Localized some more strings.
+- Fixed pet buffs having the incorrect tooltips.
 
 V2.31
 - Added some Mod Calls.

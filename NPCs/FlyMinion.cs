@@ -55,11 +55,11 @@ namespace OphioidMod.NPCs
             int associatedNPCType = ModContent.NPCType<FlyMinionCacoon>();
             bestiaryEntry.UIInfoProvider = new CommonEnemyUICollectionInfoProvider(ContentSamples.NpcBestiaryCreditIdsByNpcNetIds[associatedNPCType], quickUnlock: true);
 
-            bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
-            {
+            bestiaryEntry.Info.AddRange(
+            [
                     BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-                    new FlavorTextBestiaryInfoElement("Small Ophioid flies")
-            });
+                    new FlavorTextBestiaryInfoElement("Mods.OphioidMod.NPCs.FlyMinion.Bestiary")
+            ]);
         }
 
         public override void FindFrame(int frameHeight)
@@ -92,7 +92,7 @@ namespace OphioidMod.NPCs
                 NPC.netUpdate = true;
             }
 
-            Vector2 masterloc = new Vector2(NPC.Center.X, -160); ;
+            Vector2 masterloc = new(NPC.Center.X, -160); ;
             if (!nomaster)
             {
                 masterloc = Master.Center - new Vector2(0, -96);
@@ -173,11 +173,11 @@ namespace OphioidMod.NPCs
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
-            bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
-            {
+            bestiaryEntry.Info.AddRange(
+            [
                     BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-                    new FlavorTextBestiaryInfoElement("These small Ophioid flies carry the Ophiocoon to protect the Ophiofly")
-            });
+                    new FlavorTextBestiaryInfoElement("Mods.OphioidMod.NPCs.FlyMinionCacoon.Bestiary")
+            ]);
         }
 
         public override void AI()
@@ -217,7 +217,7 @@ namespace OphioidMod.NPCs
 
             if (Main.rand.Next(0, 200) < 1 && NPC.ai[2] == 0 && Main.netMode != NetmodeID.MultiplayerClient)
             {
-                HalfVector2 half = new HalfVector2(Main.rand.Next(-120, 120), Main.rand.Next(-280, 20)); NPC.ai[2] = ReLogic.Utilities.ReinterpretCast.UIntAsFloat(half.PackedValue);
+                HalfVector2 half = new(Main.rand.Next(-120, 120), Main.rand.Next(-280, 20)); NPC.ai[2] = ReLogic.Utilities.ReinterpretCast.UIntAsFloat(half.PackedValue);
                 NPC.netUpdate = true;
             }
 

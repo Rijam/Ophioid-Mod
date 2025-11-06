@@ -32,6 +32,7 @@ namespace OphioidMod
         {
             downedOphiopede = false;
             downedOphiopede2 = false;
+            Ophiofly.CustomWorldEvilForDeathMessage = string.Empty;
         }
 
         public override void SaveWorldData(TagCompound tag)

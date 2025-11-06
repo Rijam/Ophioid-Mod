@@ -66,7 +66,7 @@ namespace OphioidMod
         public override void Unload()
         {
             Instance = null;
-            Ophiofly.CustomWorldEvilForDeathMessage = "";
+            Ophiofly.CustomWorldEvilForDeathMessage = string.Empty;
         }
         
         public override void PostSetupContent()

@@ -3,14 +3,12 @@ Mods: {
 		Buffs: {
 			BabyOphioflyBuff: {
 				DisplayName: Baby Ophioid Fly
-				Tooltip: Gross but, oddly cute
-				Description: Mods.OphioidMod.Buffs.BabyOphioflyBuff.Description
+				Description: Gross but, oddly cute
 			}
 
 			BabyOphiopedeBuff: {
 				DisplayName: Baby Ophioid Larva
-				Tooltip: Gross but, oddly cute
-				Description: Mods.OphioidMod.Buffs.BabyOphiopedeBuff.Description
+				Description: Gross but, oddly cute
 			}
 		}
 
@@ -22,7 +20,11 @@ Mods: {
 
 			SporeInfestedEgg: {
 				DisplayName: Spore Infested Egg
-				Tooltip: "'Looks like this egg didn't hatch yet to attack me...'"
+				Tooltip:
+					'''
+					Summons a pet Ophioid fly
+					'Looks like this egg didn't hatch yet to attack me...'
+					'''
 			}
 
 			Ophiopedetrophyitem: {
@@ -37,7 +39,11 @@ Mods: {
 
 			OphioidLarva: {
 				DisplayName: Ophioid Larva
-				Tooltip: "'A little Ophiopede'"
+				Tooltip:
+					'''
+					Summons a pet baby Ophiopede
+					'A little Ophiopede'
+					'''
 			}
 
 			MusicBoxMetamorphosis: {
@@ -91,11 +97,20 @@ Mods: {
 
 		NPCs: {
 			EvenMoreVileSpit.DisplayName: Even More Vile Spit
-			FlyMinion.DisplayName: Ophioid Fly Minion
-			FlyMinionCacoon.DisplayName: Coocoon Carriers
+
+			FlyMinion: {
+				DisplayName: Ophioid Fly Minion
+				Bestiary: Small Ophioid flies
+			}
+
+			FlyMinionCacoon: {
+				DisplayName: Coocoon Carriers
+				Bestiary: These small Ophioid flies carry the Ophiocoon to protect the Ophiofly
+			}
 
 			Ophiocoon: {
 				DisplayName: Ophiocoon
+				Bestiary: Ophiopede metamorphosizes into Ophiofly!
 				DeathMessage: The Ophiofly hatches from the Cocoon!
 			}
 
@@ -103,6 +118,7 @@ Mods: {
 
 			Ophiofly: {
 				DisplayName: Ophiofly
+				Bestiary: The fight against Ophiofly.
 
 				BossChecklistIntegration: {
 					EntryName: Ophiopede & Ophiofly
@@ -115,6 +131,7 @@ Mods: {
 
 			OphiopedeHead: {
 				DisplayName: Ophiopede
+				Bestiary: The first fight against Ophiopede.
 
 				BossChecklistIntegration: {
 					SpawnInfo: Use a [i:OphioidMod/DeadFungusbug] or [i:OphioidMod/LivingCarrion] at any time
@@ -130,11 +147,16 @@ Mods: {
 
 			OphiopedeHead2: {
 				DisplayName: Ophiopede
+				Bestiary: The second fight against Ophiopede.
 				SummonMessage: The Ophiopede begins to metamorphosize!
 			}
 
 			OphSporeCloud.DisplayName: Ophioid Spore Cloud
-			TheSeeing.DisplayName: The Seeing
+
+			TheSeeing: {
+				DisplayName: The Seeing
+				Bestiary: Dislodged Ophiopede eyes
+			}
 		}
 
 		Projectiles: {
@@ -162,6 +184,18 @@ Mods: {
 			OphiodBossTrophy: {
 				DisplayName: Boss Trophy
 				MapEntry: Ophiod Boss Trophy
+			}
+		}
+
+		Achievements: {
+			OphiopedeKilled: {
+				FriendlyName: Ophioid Epidemic
+				Description: Defeat the Ophiopede, first form of the insidious ophioids.
+			}
+
+			OphioflyKilled: {
+				FriendlyName: Metamorphosized
+				Description: Defeat the Ophiofly, final form of the ophioid abomination.
 			}
 		}
 	}

@@ -68,11 +68,11 @@ namespace OphioidMod.NPCs
             int associatedNPCType = ModContent.NPCType<Ophiofly>();
             bestiaryEntry.UIInfoProvider = new CommonEnemyUICollectionInfoProvider(ContentSamples.NpcBestiaryCreditIdsByNpcNetIds[associatedNPCType], quickUnlock: true);
 
-            bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
-            {
+            bestiaryEntry.Info.AddRange(
+            [
                 BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-                new FlavorTextBestiaryInfoElement("Ophiopede metamorphosizes into Ophiofly!")
-            });
+                new FlavorTextBestiaryInfoElement("Mods.OphioidMod.NPCs.Ophiocoon.Bestiary")
+            ]);
         }
 
         public override void OnKill()

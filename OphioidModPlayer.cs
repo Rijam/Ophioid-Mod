@@ -7,13 +7,13 @@ namespace OphioidMod
     public class OphioidPlayer : ModPlayer
     {
 
-        public bool PetBuff = false;
-        public bool PetBuff2 = false;
+        public bool PetBabyOphiofly = false;
+        public bool PetBabyOphiopede = false;
 
         public override void ResetEffects()
         {
-            PetBuff = false;
-            PetBuff2 = false;
+            PetBabyOphiofly = false;
+            PetBabyOphiopede = false;
         }
 
         public override void OnHitByProjectile(Projectile proj, Player.HurtInfo hurtInfo)

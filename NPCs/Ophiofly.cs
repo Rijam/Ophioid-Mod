@@ -87,11 +87,11 @@ namespace OphioidMod.NPCs
             //int associatedNPCType = ModContent.NPCType<Ophiocoon>();
             //bestiaryEntry.UIInfoProvider = new CommonEnemyUICollectionInfoProvider(ContentSamples.NpcBestiaryCreditIdsByNpcNetIds[associatedNPCType], quickUnlock: true);
 
-            bestiaryEntry.Info.AddRange(new List<IBestiaryInfoElement>
-            {
+            bestiaryEntry.Info.AddRange(
+            [
                 BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-                new FlavorTextBestiaryInfoElement("The fight against Ophiofly.")
-            });
+                new FlavorTextBestiaryInfoElement("Mods.OphioidMod.NPCs.Ophiofly.Bestiary")
+            ]);
         }
 
         public override void SendExtraAI(BinaryWriter writer)   
@@ -123,7 +123,7 @@ namespace OphioidMod.NPCs
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 NPC.ai[0] = 0;
-                int[] pick = { 0, 1, 2, 2, 3, 4 };
+                int[] pick = [0, 1, 2, 2, 3, 4];
                 chargesleft = 2;
 
                 NPC.ai[1] = pick[Main.rand.Next(0, pick.Length)];
@@ -241,7 +241,7 @@ namespace OphioidMod.NPCs
                         {
                             if (Main.rand.Next(0, 100) < 25)
                             {
-                                Vector2 randomcircle = new Vector2(Main.rand.Next(-8000, 8000), Main.rand.Next(-8000, 8000)); randomcircle.Normalize();
+                                Vector2 randomcircle = new(Main.rand.Next(-8000, 8000), Main.rand.Next(-8000, 8000)); randomcircle.Normalize();
                                 int num316 = Dust.NewDust(NPC.Center + new Vector2(num315 * 3, -30), 0, 80, DustID.ScourgeOfTheCorruptor, 0f, 0f, 50, Main.hslToRgb(0.15f, 1f, 1.00f), 4f - Math.Abs(num315) / 15f);
                                 Main.dust[num316].noGravity = true;
                                 Dust dust3 = Main.dust[num316];
@@ -271,7 +271,7 @@ namespace OphioidMod.NPCs
 
             for (int a = 0; a < 20; a++)
             {
-                Vector2 randomcircle = new Vector2(Main.rand.Next(-8000, 8000), Main.rand.Next(-8000, 8000)); randomcircle.Normalize();
+                Vector2 randomcircle = new(Main.rand.Next(-8000, 8000), Main.rand.Next(-8000, 8000)); randomcircle.Normalize();
                 Vector2 vecr = randomcircle * 512;
                 vecr *= (1f - (300f / (NPC.ai[0] % 300)));
 
@@ -460,9 +460,9 @@ namespace OphioidMod.NPCs
             }
         }
 
-        public override void BossLoot(ref string name, ref int potionType)
+        public override void BossLoot(ref int potionType)
         {
-            name = "Ophioid";
+            // name = "Ophioid";
             potionType = ItemID.GreaterHealingPotion;
             if (NPC.downedMoonlord)
                 potionType = ItemID.SuperHealingPotion;
@@ -699,7 +699,7 @@ namespace OphioidMod.NPCs
             {
                 for (int i = 1; i < 8; i += 1)
                 {
-                    Vector2 Vect = new Vector2(Main.rand.Next(-2, 2), Main.rand.Next(-2, 2)); Vect.Normalize();
+                    Vector2 Vect = new(Main.rand.Next(-2, 2), Main.rand.Next(-2, 2)); Vect.Normalize();
                     Gore.NewGore(NPC.GetSource_Death(), NPC.Center, Vect, ModContent.Find<ModGore>("OphioidMod/ophiofly_gore_" + i).Type, 1f);
                 }
             }

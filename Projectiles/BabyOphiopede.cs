@@ -34,9 +34,9 @@ namespace OphioidMod.Projectiles
             OphioidPlayer modPlayer = player.GetModPlayer<OphioidPlayer>();
             if (player.dead)
             {
-                modPlayer.PetBuff2 = false;
+                modPlayer.PetBabyOphiopede = false;
             }
-            if (modPlayer.PetBuff2)
+            if (modPlayer.PetBabyOphiopede)
             {
                 Projectile.timeLeft = 2;
             }

@@ -79,7 +79,7 @@ namespace OphioidMod.NPCs
             NPC.aiStyle = -1;
             NPC.boss = true;
             AIType = NPCID.Wraith;
-            AnimationType = 0;
+            AnimationType = NPCID.None;
             NPC.behindTiles = true;
             NPC.noTileCollide = true;
             NPC.noGravity = true;
@@ -95,14 +95,14 @@ namespace OphioidMod.NPCs
             int associatedNPCType2 = ModContent.NPCType<OphiopedeTail>();
             bestiaryEntry.UIInfoProvider = new CommonEnemyUICollectionInfoProvider(ContentSamples.NpcBestiaryCreditIdsByNpcNetIds[associatedNPCType], quickUnlock: true);*/
 
-            bestiaryEntry.Info.AddRange(new List<IBestiaryInfoElement>
-            {
+            bestiaryEntry.Info.AddRange(
+            [
                 BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-                new FlavorTextBestiaryInfoElement("The first fight against Ophiopede.")
-            });
+                new FlavorTextBestiaryInfoElement("Mods.OphioidMod.NPCs.OphiopedeHead.Bestiary")
+            ]);
         }
 
-        public override void BossLoot(ref string name, ref int potionType)
+        public override void BossLoot(ref int potionType)
         {
             potionType = ItemID.GreaterHealingPotion;
             if (NPC.downedMoonlord)
@@ -112,7 +112,7 @@ namespace OphioidMod.NPCs
         public override bool PreKill()
         {
             Vector2 where = NPC.position;
-            List<Vector2> parts = new List<Vector2>();
+            List<Vector2> parts = new();
             for (int i = 0; i < Main.maxNPCs; i += 1)
             {
                 NPC npc2 = Main.npc[i];
@@ -485,7 +485,7 @@ namespace OphioidMod.NPCs
                 collision = false;
             }
 
-            Vector2 npcCenter = new Vector2(NPC.position.X + NPC.width * 0.5f, NPC.position.Y + NPC.height * 0.5f);
+            Vector2 npcCenter = new(NPC.position.X + NPC.width * 0.5f, NPC.position.Y + NPC.height * 0.5f);
             float targetXPos = Main.player[NPC.target].position.X + (Main.player[NPC.target].width / 2);
             float targetYPos = Main.player[NPC.target].position.Y + (Main.player[NPC.target].height / 2);
             float targetRoundedPosX = (float)((int)(targetXPos / 16.0) * 16);
@@ -520,7 +520,7 @@ namespace OphioidMod.NPCs
 
                 if (NPC.ai[0] > -9250)
                 {
-                    Vector2 moveto = new Vector2(targetXPos - NPC.Center.X, (NPC.Center.Y - 600f) - NPC.Center.Y);
+                    Vector2 moveto = new(targetXPos - NPC.Center.X, (NPC.Center.Y - 600f) - NPC.Center.Y);
                     moveto.Normalize();
                     NPC.velocity += moveto * 1.2f;
                     if (NPC.velocity.Length() > 15f)
@@ -566,7 +566,7 @@ namespace OphioidMod.NPCs
                                 Main.projectile[num54].velocity = new Vector2(Main.rand.Next(-8, 8) * (Main.rand.Next(0, 2) == 0 ? 1 : -1), Main.rand.Next(-10, -3));
                                 Main.projectile[num54].damage = (int)(50);
                                 Main.projectile[num54].timeLeft = 400;
-                                Main.projectile[num54].tileCollide = (phase == 0 ? false : true);
+                                Main.projectile[num54].tileCollide = (phase != 0);
                                 Main.projectile[num54].netUpdate = true;
                                 IdgProjectile.Sync(num54);
                                 //IdgProjectile.AddOnHitBuff(num54,BuffID.Stinky,60*15);
@@ -604,7 +604,7 @@ namespace OphioidMod.NPCs
                         SoundEngine.PlaySound(SoundID.WormDig, NPC.position);
                     }
 
-                    Vector2 moveto = new Vector2(targetXPos - NPC.Center.X, targetYPos - NPC.Center.Y);
+                    Vector2 moveto = new(targetXPos - NPC.Center.X, targetYPos - NPC.Center.Y);
                     if ((NPC.ai[0]) % 700 < 500 && belowground < 5 && !((NPC.ai[0] - 40f) % 400 > 360))
                     {
                         charge = true;
@@ -727,7 +727,7 @@ namespace OphioidMod.NPCs
             NPC.aiStyle = -1;
             NPC.boss = false;
             AIType = NPCID.Wraith;
-            AnimationType = 0;
+            AnimationType = NPCID.None;
             NPC.behindTiles = true;
             NPC.noTileCollide = true;
             NPC.noGravity = true;
@@ -800,7 +800,7 @@ namespace OphioidMod.NPCs
 
                 if (NPC.ai[0] == 150)
                     NPC.netUpdate = true;
-                Vector2 npcCenter = new Vector2(NPC.position.X + (float)NPC.width * 0.5f, NPC.position.Y + (float)NPC.height * 0.5f);
+                Vector2 npcCenter = new(NPC.position.X + (float)NPC.width * 0.5f, NPC.position.Y + (float)NPC.height * 0.5f);
                 int size = 60;
                 float dirX = Main.npc[(int)NPC.ai[2]].position.X + (float)(size / 2) - npcCenter.X;
                 float dirY = Main.npc[(int)NPC.ai[2]].position.Y + (float)(size / 2) - npcCenter.Y;
@@ -821,7 +821,7 @@ namespace OphioidMod.NPCs
                     for (int i = 0; i < 5; i += 1)
                     {
                         NPC.HitEffect(0, 10.0);
-                        Vector2 Vect = new Vector2(Main.rand.Next(-2, 2), Main.rand.Next(-2, 2)); Vect.Normalize();
+                        Vector2 Vect = new(Main.rand.Next(-2, 2), Main.rand.Next(-2, 2)); Vect.Normalize();
                         if (Main.netMode != NetmodeID.Server)
                             Gore.NewGore(NPC.GetSource_Death(), NPC.Center, Vect, ModContent.Find<ModGore>(Mod.Name + "/gore_" + Main.rand.Next(5, 9)).Type, 1f);
                     }
@@ -865,14 +865,14 @@ namespace OphioidMod.NPCs
                 if ((Main.npc[(int)NPC.ai[3]].ai[0] - 100f) % 400 > 280 && Main.npc[(int)NPC.ai[2]].ai[0] > 0 && NPC.ai[0] % (Main.expertMode ? 75 : 115) == 0)
                 {
                     int thattarget = 0;
-                    Rectangle rectangle1 = new Rectangle((int)NPC.position.X, (int)NPC.position.Y - 600, NPC.width, NPC.height + 1200);
+                    Rectangle rectangle1 = new((int)NPC.position.X, (int)NPC.position.Y - 600, NPC.width, NPC.height + 1200);
                     int maxDistance = 250;
                     bool playerCollision = false;
                     for (int index = 0; index < 255; ++index)
                     {
                         if (Main.player[index].active)
                         {
-                            Rectangle rectangle2 = new Rectangle((int)Main.player[index].position.X - maxDistance, (int)Main.player[index].position.Y - 32, maxDistance * 2, 64);
+                            Rectangle rectangle2 = new((int)Main.player[index].position.X - maxDistance, (int)Main.player[index].position.Y - 32, maxDistance * 2, 64);
                             if (rectangle1.Intersects(rectangle2))
                             {
                                 playerCollision = true;
@@ -1090,7 +1090,7 @@ namespace OphioidMod.NPCs
             NPC.aiStyle = -1;
             NPC.boss = true;
             AIType = NPCID.Wraith;
-            AnimationType = 0;
+            AnimationType = NPCID.None;
             NPC.behindTiles = true;
             NPC.noTileCollide = true;
             NPC.noGravity = true;
@@ -1104,11 +1104,11 @@ namespace OphioidMod.NPCs
             int associatedNPCType = ModContent.NPCType<Ophiofly>();
             bestiaryEntry.UIInfoProvider = new CommonEnemyUICollectionInfoProvider(ContentSamples.NpcBestiaryCreditIdsByNpcNetIds[associatedNPCType], quickUnlock: true);
 
-            bestiaryEntry.Info.AddRange(new List<IBestiaryInfoElement>
-            {
+            bestiaryEntry.Info.AddRange(
+            [
                 BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-                new FlavorTextBestiaryInfoElement("The second fight against Ophiopede.")
-            });
+                new FlavorTextBestiaryInfoElement("Mods.OphioidMod.NPCs.OphiopedeHead2.Bestiary")
+            ]);
         }
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)

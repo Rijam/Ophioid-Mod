@@ -36,7 +36,7 @@ namespace OphioidMod.NPCs
             NPC.aiStyle = -1;
             NPC.boss = false;
             AIType = NPCID.Wraith;
-            AnimationType = 0;
+            AnimationType = NPCID.None;
             NPC.behindTiles = true;
             NPC.noTileCollide = true;
             NPC.noGravity = true;
@@ -49,11 +49,11 @@ namespace OphioidMod.NPCs
             int associatedNPCType = ModContent.NPCType<Ophiofly>();
             bestiaryEntry.UIInfoProvider = new CommonEnemyUICollectionInfoProvider(ContentSamples.NpcBestiaryCreditIdsByNpcNetIds[associatedNPCType], quickUnlock: true);
 
-            bestiaryEntry.Info.AddRange(new List<IBestiaryInfoElement>
-            {
+            bestiaryEntry.Info.AddRange(
+            [
                 BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-                new FlavorTextBestiaryInfoElement("Dislodged Ophiopede eyes")
-            });
+                new FlavorTextBestiaryInfoElement("Mods.OphioidMod.NPCs.TheSeeing.Bestiary")
+            ]);
         }
 
         public override bool CheckActive()
@@ -102,10 +102,10 @@ namespace OphioidMod.NPCs
 
             if (ply.active)
             {
-                Vector2 diff4 = new Vector2(ply.Center.X - NPC.Center.X, ply.Center.Y - NPC.Center.Y);
+                Vector2 diff4 = new(ply.Center.X - NPC.Center.X, ply.Center.Y - NPC.Center.Y);
             }
             double angle = 2.0 * Math.PI * ((NPC.ai[2] + ((float)(Main.npc[(int)NPC.ai[3]].rotation / Math.PI) * 360f)) / 360f);
-            Vector2 diff3 = new Vector2((float)Math.Cos(angle) * 5f, (float)Math.Sin(angle) * 5f);//new Vector2(ply.Center.X-NPC.Center.X,ply.Center.Y-NPC.Center.Y);
+            Vector2 diff3 = new((float)Math.Cos(angle) * 5f, (float)Math.Sin(angle) * 5f);//new Vector2(ply.Center.X-NPC.Center.X,ply.Center.Y-NPC.Center.Y);
             diff3.Normalize();
             NPC.velocity += (diff3) * (1.8f * ownerspeed);
 

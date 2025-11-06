@@ -46,12 +46,13 @@ namespace OphioidMod.Items
             Item.value = Item.sellPrice(0, 1, 0, 0);
         }
 
-        public override void UseStyle(Player player, Rectangle heldItemFrame)
+        public override bool? UseItem(Player player)
         {
             if (player.whoAmI == Main.myPlayer && player.itemTime == 0)
             {
                 player.AddBuff(Item.buffType, 3600, true);
             }
+            return true;
         }
     }
     public class Ophiopedetrophyitem : ModItem
@@ -145,12 +146,13 @@ namespace OphioidMod.Items
             Item.value = Item.sellPrice(0, 5, 0, 0);
         }
 
-        public override void UseStyle(Player player, Rectangle heldItemFrame)
+        public override bool? UseItem(Player player)
         {
             if (player.whoAmI == Main.myPlayer && player.itemTime == 0)
             {
                 player.AddBuff(Item.buffType, 3600, true);
             }
+            return true;
         }
     }
 }

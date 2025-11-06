@@ -1,5 +1,3 @@
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -17,10 +15,7 @@ namespace OphioidMod.Projectiles
                 .WithSpriteDirection(-1);
         }
 
-        public override string Texture
-        {
-            get { return ("OphioidMod/Projectiles/baby_ophiofly_frames"); }
-        }
+        public override string Texture => "OphioidMod/Projectiles/baby_ophiofly_frames";
 
         public override void SetDefaults()
         {
@@ -43,9 +38,9 @@ namespace OphioidMod.Projectiles
             OphioidPlayer modPlayer = player.GetModPlayer<OphioidPlayer>();
             if (player.dead)
             {
-                modPlayer.PetBuff = false;
+                modPlayer.PetBabyOphiofly = false;
             }
-            if (modPlayer.PetBuff)
+            if (modPlayer.PetBabyOphiofly)
             {
                 Projectile.timeLeft = 2;
             }
