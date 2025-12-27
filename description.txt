@@ -13,6 +13,9 @@ Current Content:
 
 Version History :
 
+V2.33
+- Fixed Wikithis support.
+
 V2.32
 - Added mod achievements for both bosses.
 - Localized some more strings.

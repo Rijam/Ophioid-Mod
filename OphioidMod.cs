@@ -59,7 +59,7 @@ namespace OphioidMod
             if (ModLoader.TryGetMod("Wikithis", out Mod wikithis) && !Main.dedServ)
             {
                 // The wiki is a little outdated. It will need to be moved to wiki.gg and updated for the 1.4 version.
-                wikithis.Call("AddModURL", this, "https://terrariamods.fandom.com/wiki/Ophioid{}");
+                wikithis.Call("AddModURL", this, "https://terrariamods.fandom.com/wiki/Ophioid/{}");
             }
         }
 

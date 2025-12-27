@@ -12,6 +12,14 @@ Current Content:
 
 Version History :
 
+V2.33
+- Fixed Wikithis support.
+
+V2.32
+- Added mod achievements for both bosses.
+- Localized some more strings.
+- Fixed pet buffs having the incorrect tooltips.
+
 V2.31
 - Added some Mod Calls.
 - Re-added support for Fargo's Mutant Mod.
