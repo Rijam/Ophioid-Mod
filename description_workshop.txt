@@ -13,6 +13,10 @@ Current Content:
 
 Version History :
 
+V2.34
+- 1.4.5 Port
+- The Music Boxes will now shimmer transmute into unrecorded music boxes.
+
 V2.33
 - Fixed Wikithis support.
 

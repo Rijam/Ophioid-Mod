@@ -85,7 +85,7 @@ namespace OphioidMod.Projectiles
             Projectile.position.X = MathHelper.Clamp(Projectile.position.X, 160f, Main.maxTilesX * 16 - 160);
             Projectile.position.Y = MathHelper.Clamp(Projectile.position.Y, 160f, Main.maxTilesY * 16 - 160);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)
         {
             Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
             int numOfSegments = 6; // Also change the TrailCacheLength

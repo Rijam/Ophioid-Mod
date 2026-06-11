@@ -460,13 +460,16 @@ namespace OphioidMod.NPCs
             }
         }
 
-        public override void BossLoot(ref int potionType)
+        public override void BossLoot(ref int potionType, ref int potionStack, ref int heartStack)
         {
             // name = "Ophioid";
             potionType = ItemID.GreaterHealingPotion;
             if (NPC.downedMoonlord)
                 potionType = ItemID.SuperHealingPotion;
-        }
+            // This is the default behavior
+            // potionStack = Main.rand.Next(5, 16); // 5-15 potions
+			// heartStack = Main.rand.Next(5, 10); // 5-9 hearts
+		}
 
         public override void OnKill()
         {

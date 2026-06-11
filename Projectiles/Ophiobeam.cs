@@ -96,7 +96,7 @@ namespace OphioidMod.Projectiles
             }
 
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)
         {
             string[] lasers;
             lasers = GetType() == typeof(Ophiobeamichor) ? new string[] { "OphioidMod/Projectiles/frame_1", "OphioidMod/Projectiles/frame2", "OphioidMod/Projectiles/frame_3" } : new string[] { "OphioidMod/Projectiles/beam_1", "OphioidMod/Projectiles/beam_2", "OphioidMod/Projectiles/beam_3" };

@@ -228,7 +228,7 @@ namespace OphioidMod
 
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)
         {
             IDGHelper.DrawTether(laserTexture, Hitspot, Projectile.Center, Main.screenPosition, Projectile.Opacity);
             return false;

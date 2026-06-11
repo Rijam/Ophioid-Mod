@@ -14,7 +14,7 @@ namespace OphioidMod.Items
             // DisplayName.SetDefault("Dead Fungusbug");
             // Tooltip.SetDefault("'A putrid stench comes from the thing you just made, it might attract something...' \nSummons Ophiopede in a Corruption world");
             Item.ResearchUnlockCount = 3;
-            ItemID.Sets.SortingPriorityBossSpawns[Type] = 12;
+            ItemID.Sets.SortingPriorityMiscImportants[Type] = 12;
             ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<LivingCarrion>();
         }
         public override void SetDefaults()
@@ -82,7 +82,7 @@ namespace OphioidMod.Items
             // DisplayName.SetDefault("Infested Compost");
             // Tooltip.SetDefault("'An amalgamation of organic vileness \nSummons Ophiopede?");
             Item.ResearchUnlockCount = 3;
-            ItemID.Sets.SortingPriorityBossSpawns[Type] = 12;
+            ItemID.Sets.SortingPriorityMiscImportants[Type] = 12;
         }
 
         public override bool CanUseItem(Player player)
@@ -136,7 +136,7 @@ namespace OphioidMod.Items
             // DisplayName.SetDefault("Living Carrion");
             // Tooltip.SetDefault("'A putrid stench comes from the thing you just made, it might attract something...' \nSummons Ophiopede in a Crimson world");
             Item.ResearchUnlockCount = 3;
-            ItemID.Sets.SortingPriorityBossSpawns[Type] = 12;
+            ItemID.Sets.SortingPriorityMiscImportants[Type] = 12;
             ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<DeadFungusbug>();
         }
 

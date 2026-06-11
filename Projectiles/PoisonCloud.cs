@@ -59,9 +59,9 @@ namespace OphioidMod.Projectiles
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)
         {
-            return base.PreDraw(ref lightColor);
+            return base.PreDraw(player, ref lightColor);
         }
     }
 }
