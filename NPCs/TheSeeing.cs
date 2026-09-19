@@ -63,7 +63,7 @@ namespace OphioidMod.NPCs
 
 		public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
 		{
-			target.AddBuff(BuffID.Darkness, 60 * 4, true);
+			target.AddBuff(BuffID.Darkness, 60 * 4);
         }
 
 

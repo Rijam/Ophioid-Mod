@@ -51,9 +51,9 @@ namespace OphioidMod.Projectiles
                     Rectangle rectangle2 = new Rectangle((int)Main.player[index].position.X - Main.player[index].width, (int)Main.player[index].position.Y - Main.player[index].height, Main.player[index].height * 2, Main.player[index].width * 2);
                     if (rectangle1.Intersects(rectangle2))
                     {
-                        Main.player[index].AddBuff(BuffID.Venom, 60 * 8, true);
-                        Main.player[index].AddBuff(BuffID.OgreSpit, 60 * 5, true);
-                        Main.player[index].AddBuff(BuffID.Stinky, 60 * 15, true);
+                        Main.player[index].AddBuff(BuffID.Venom, 60 * 8);
+                        Main.player[index].AddBuff(BuffID.OgreSpit, 60 * 5);
+                        Main.player[index].AddBuff(BuffID.Stinky, 60 * 15);
                     }
                 }
             }

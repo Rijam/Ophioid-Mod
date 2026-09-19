@@ -652,7 +652,7 @@ namespace OphioidMod.NPCs
         {
             if (NPC.ai[1] == 2)
             {
-                target.AddBuff(BuffID.Rabies, 60 * 15, true);
+                target.AddBuff(BuffID.Rabies, 60 * 15);
             }
         }
 

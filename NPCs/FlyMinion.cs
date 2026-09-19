@@ -115,7 +115,7 @@ namespace OphioidMod.NPCs
 		{
             if (Main.rand.Next(0, 3) == 0)
             {
-                target.AddBuff(BuffID.Weak, 60 * 8, true);
+                target.AddBuff(BuffID.Weak, 60 * 8);
             }
         }
 
